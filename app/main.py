@@ -1,12 +1,21 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from .models import ChatRequest
 from .services import generate_response
 
 app = FastAPI(title="XIAO Backend")
 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):
-    # Pass the full list of messages to the service
     response = await generate_response(request.messages)
     return {"response": response}
 
