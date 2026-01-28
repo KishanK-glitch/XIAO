@@ -12,11 +12,11 @@ class ContextData(BaseModel):
     instructions: str
     projects: List[str]
 
-# NEW: Structure for a single message
+
 class Message(BaseModel):
-    role: str  # "user" or "assistant"
+    role: str  
     content: str
 
-# UPDATE: Request now accepts a list of messages
+
 class ChatRequest(BaseModel):
     messages: List[Message]
